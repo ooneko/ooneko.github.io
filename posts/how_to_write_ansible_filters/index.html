@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>华彬闳的Blog  | HOW TO WRITE ANSIBLE FILTER PLUGINS</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.59.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.d98f2eb6bcd1eaedb7edf166bd16af26.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="HOW TO WRITE ANSIBLE FILTER PLUGINS" />
+<meta property="og:description" content="什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
+ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:
+ Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
+ 总结一下就是：
+ filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  如何创建filter plugin 刚才已经知道filter plugin 本质上是一个python function." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ooneko.github.io/posts/how_to_write_ansible_filters/" />
+<meta property="article:published_time" content="2019-10-22T12:13:09+08:00" />
+<meta property="article:modified_time" content="2019-10-22T12:13:09+08:00" />
+<meta itemprop="name" content="HOW TO WRITE ANSIBLE FILTER PLUGINS">
+<meta itemprop="description" content="什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
+ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:
+ Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
+ 总结一下就是：
+ filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  如何创建filter plugin 刚才已经知道filter plugin 本质上是一个python function.">
+
+
+<meta itemprop="datePublished" content="2019-10-22T12:13:09&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-22T12:13:09&#43;08:00" />
+<meta itemprop="wordCount" content="201">
+
+
+
+<meta itemprop="keywords" content="ansible,filter,plugins," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HOW TO WRITE ANSIBLE FILTER PLUGINS"/>
+<meta name="twitter:description" content="什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
+ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:
+ Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
+ 总结一下就是：
+ filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  如何创建filter plugin 刚才已经知道filter plugin 本质上是一个python function."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://ooneko.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      华彬闳的Blog
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">HOW TO WRITE ANSIBLE FILTER PLUGINS</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-10-22T12:13:09&#43;08:00">October 22, 2019</time>
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h1 id="什么是-ansible-filter-plugin">什么是 ansible filter plugin ？</h1>
+
+<p>先来看一段代码：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">union_list: {{ [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>] | union([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]) }}</code></pre></div>
+这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？</p>
+
+<p>ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:</p>
+
+<blockquote>
+<p>Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.</p>
+</blockquote>
+
+<p>总结一下就是：</p>
+
+<ul>
+<li>filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果</li>
+<li>filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用</li>
+<li>filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument</li>
+</ul>
+
+<h1 id="如何创建filter-plugin">如何创建filter plugin</h1>
+
+<p>刚才已经知道filter plugin 本质上是一个python function.
+然后根据<a href="https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html">Ansible Doc</a>，还知道开发一个plugin的基本要求：</p>
+
+<ol>
+<li>be written in Python</li>
+<li>raise errors</li>
+<li>return strings in unicode</li>
+<li>conform to Ansible’s configuration and documentation standards</li>
+</ol>
+
+<h2 id="be-written-in-python">be written in Python</h2>
+
+<p>这个很好理解了，plugin必须用python写,不过在python里面调用其他二进制就没有限制了。</p>
+
+<h2 id="raise-errors">raise errors</h2>
+
+<p>遇到exception 需要用AnsibleError() raise出来。并且应该用to_native来格式化错误输出。</p>
+
+<h2 id="return-strings-in-unicode">return strings in unicode</h2>
+
+<p>如果输出是字符串的话，应该用to_text 转换成unicode进行输出。</p>
+
+<h2 id="conform-to-ansible-s-configuration-and-documentation-standards">conform to Ansible’s configuration and documentation standards</h2>
+
+<p>根据文档描述， filter plugin 不需要documention来描述。</p>
+
+<blockquote>
+<p>Filter plugins do not use the standard configuration and documentation system described above.</p>
+</blockquote>
+
+<h2 id="upper-filter-plugin">upper filter plugin</h2>
+
+<p>总结以上4条规则，就可以开发自己的filter plugin了。</p>
+
+<p>下面这个example, 对字符串进行uppper操作。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> ansible.module_utils._text <span style="color:#f92672">import</span> to_text, to_native
+<span style="color:#f92672">from</span> ansible.errors <span style="color:#f92672">import</span> AnsibleError
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FilterModule</span>(object):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">filters</span>(self):
+        <span style="color:#66d9ef">return</span> {
+            <span style="color:#e6db74">&#39;upper&#39;</span>: do_upper,
+        }
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_upper</span>(s):
+    <span style="color:#66d9ef">try</span>:
+        result <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>upper()
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+        AnsibleError(<span style="color:#e6db74">&#39;Something happend. exception: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> to_native(e))
+    <span style="color:#66d9ef">return</span> to_text(result)</code></pre></div></p>
+
+<p>拿到playbook里面试一下</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- debug:
+    msg: <span style="color:#e6db74">&#34;{{ &#39;hello world!&#39; | upper }}&#34;</span></code></pre></div>
+
+<p>output:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ok: <span style="color:#f92672">[</span>localhost<span style="color:#f92672">]</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;HELLO WORLD!&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div></p>
+
+<h1 id="ref">ref</h1>
+
+<p><a href="https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html">https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html</a></p>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/ansible" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">ansible</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/filter" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">filter</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/plugins" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">plugins</a>
+   </li>
+  
+</ul>
+<div class="mt6">
+      
+      
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://ooneko.github.io/" >
+    &copy; 2019 华彬闳的Blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

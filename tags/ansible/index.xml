@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ansible on 华彬闳的Blog</title>
+    <link>https://ooneko.github.io/tags/ansible/</link>
+    <description>Recent content in ansible on 华彬闳的Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Oct 2019 12:13:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://ooneko.github.io/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HOW TO WRITE ANSIBLE FILTER PLUGINS</title>
+      <link>https://ooneko.github.io/posts/how_to_write_ansible_filters/</link>
+      <pubDate>Tue, 22 Oct 2019 12:13:09 +0800</pubDate>
+      
+      <guid>https://ooneko.github.io/posts/how_to_write_ansible_filters/</guid>
+      <description>什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
+ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:
+ Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
+ 总结一下就是：
+ filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  如何创建filter plugin 刚才已经知道filter plugin 本质上是一个python function.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -35,7 +35,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ooneko.github.io/posts/" />
 
-<meta property="og:updated_time" content="2019-03-05T17:42:50+00:00" />
+<meta property="og:updated_time" content="2019-10-22T12:13:09+08:00" />
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
 
@@ -91,6 +91,25 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
     <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></section>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/how_to_write_ansible_filters/" class="link black dim">
+        HOW TO WRITE ANSIBLE FILTER PLUGINS
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
+ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:
+ Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
+ 总结一下就是：
+ filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  如何创建filter plugin 刚才已经知道filter plugin 本质上是一个python function.
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
