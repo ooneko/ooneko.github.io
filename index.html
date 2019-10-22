@@ -5,16 +5,18 @@
   
 
   
-  <title>Hexo</title>
+  <title>大猫的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en">
+  <meta name="description" content="大猫的Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大猫的Blog">
+<meta property="og:url" content="https:&#x2F;&#x2F;ooneko.github.io&#x2F;index.html">
+<meta property="og:site_name" content="大猫的Blog">
+<meta property="og:description" content="大猫的Blog">
+<meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="大猫的Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,7 +35,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">大猫的Blog</a>
       </h1>
       
     </div>
@@ -53,7 +55,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ooneko.github.io"></form>
       </div>
     </div>
   </div>
@@ -61,10 +63,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-10-21-how-to-write-ansible-filter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/10/21/test/" class="article-date">
-  <time datetime="2019-10-21T12:14:24.000Z" itemprop="datePublished">2019-10-21</time>
+    <a href="/2019/10/21/2019-10-21-how-to-write-ansible-filter/" class="article-date">
+  <time datetime="2019-10-21T11:11:48.000Z" itemprop="datePublished">2019-10-21</time>
 </a>
     
   </div>
@@ -75,7 +77,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/21/test/">test</a>
+      <a class="article-title" href="/2019/10/21/2019-10-21-how-to-write-ansible-filter/">如何编写Ansible filters</a>
     </h1>
   
 
@@ -87,9 +89,124 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/21/test/" data-id="ck20duv810001j54zbod78ej1" class="article-share-link">Share</a>
+      <a data-url="https://ooneko.github.io/2019/10/21/2019-10-21-how-to-write-ansible-filter/" data-id="ck20e09fr0009rn4zcamphfmf" class="article-share-link">Share</a>
       
-        <a href="http://yoursite.com/2019/10/21/test/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://ooneko.github.io/2019/10/21/2019-10-21-how-to-write-ansible-filter/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ansible-filter/" rel="tag">ansible, filter</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-03-05-howto-test-infinite-loop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/05/2019-03-05-howto-test-infinite-loop/" class="article-date">
+  <time datetime="2019-03-05T09:42:50.000Z" itemprop="datePublished">2019-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/05/2019-03-05-howto-test-infinite-loop/">如何测试&#34;无限循环&#34;的代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在写 python 有时会遇到一些”无限循环“的代码需要测试，比如一个持续监控某个api状态的线程。很有可能会写成这样:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">watch</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> self.running:</span><br><span class="line">        do_something()</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<p>这样的话，单元测试写起来就比较奇怪了。最先想到的是把其中某个函数mock掉，通过side_effect 返回一个exception 来结束测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_watch</span><span class="params">(self)</span>:</span></span><br><span class="line">        do_something = mock.Mock()</span><br><span class="line">        do_something.side_effect = [<span class="string">'some_valuable_info'</span>, Exception]</span><br><span class="line">        self.assertRaises(Exception, do_something)</span><br></pre></td></tr></table></figure>
+
+<p>有没有更好的方法呢？<br>有.</p>
+<p>把退出条件放到一个方法里面去，在测试的时候，通过mock掉这个方法，来达到退出条件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_running</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.running</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">watch</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> self.is_running():</span><br><span class="line">        do_something()</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<p>这样测试起来就容易多了, 当第一次运行时，调到的is_running 是True，第二次运行调用到is_running 的时候就会退出测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_watch</span><span class="params">(self)</span>:</span></span><br><span class="line">        mock_is_running = mock.Mock()</span><br><span class="line">        mock_is_running.side_effect = [<span class="literal">True</span>, <span class="literal">False</span>]</span><br><span class="line">        watch()</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结一下：</strong><br>几乎没有真正的‘无限循环’代码，找出它的退出条件，然后重构代码。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ooneko.github.io/2019/03/05/2019-03-05-howto-test-infinite-loop/" data-id="ck20e09fq0008rn4z17oyeeq5" class="article-share-link">Share</a>
+      
+        <a href="https://ooneko.github.io/2019/03/05/2019-03-05-howto-test-infinite-loop/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-12-11-bash_brace_expansion" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/11/2018-12-11-bash_brace_expansion/" class="article-date">
+  <time datetime="2018-12-11T07:17:28.000Z" itemprop="datePublished">2018-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/11/2018-12-11-bash_brace_expansion/">Bash brace expansion</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>bash 中的大括号”{}”,通常用来生成一组有规律的字符串</p>
+<p>最常用的 <code>mkdir /tmp/test{1..3}</code><br>在执行的时候会被翻译成:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/test1 /tmp/test2 /tmp/test3</span><br></pre></td></tr></table></figure>
+
+<p>生成连续的字符或者数字用<code>&quot;..&quot;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;0..12&#125;        =&gt; 0 1 2 3 4 5 6 7 8 9 10 11 12</span><br><span class="line">&#123;3..-2&#125;        =&gt; 3 2 1 0 -1 -2</span><br><span class="line">&#123;a..g&#125;         =&gt; a b c d e f g</span><br><span class="line">&#123;g..a&#125;         =&gt; g f e d c b a</span><br></pre></td></tr></table></figure>
+
+<p>生成非连续的字符用逗号分隔“,”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;aa,bb,cc,dd&#125;  =&gt; aa bb cc dd</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以组合使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;a,b&#123;0..3&#125;,c&#125;  =&gt; a b0 b1 b2 b3 c</span><br></pre></td></tr></table></figure>
+
+<p>当brace expation 和其他字符串一起出现时，会重复整个字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Hello"</span>&#123;0..1&#125;       =&gt; Hello0 Hello1</span><br><span class="line"><span class="string">"Hello"</span>&#123;a,b&#123;0..1&#125;,c&#125; =&gt; Helloa Hellob0 Hellob1 Helloc</span><br></pre></td></tr></table></figure>
+
+<p>还有一个比较常用个的地方是for循环<br><strong>for</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..3&#125;;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$&#123;i&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="comment"># brace expantion 在这里会把 &#123;1..3&#125;翻译成 1 2 3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> 1 2 3;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$&#123;i&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以通过 set +B 来关闭 brace expansion 特性,这个特性默认是打开的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">set</span></span><br><span class="line">...</span><br><span class="line">-B      The shell performs brace expansion (see Brace Expansion above).  This is on by default.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ooneko.github.io/2018/12/11/2018-12-11-bash_brace_expansion/" data-id="ck20e09fo0005rn4zergg8plx" class="article-share-link">Share</a>
+      
+        <a href="https://ooneko.github.io/2018/12/11/2018-12-11-bash_brace_expansion/#disqus_thread" class="article-comment-link">Comments</a>
       
       
     </footer>
@@ -99,10 +216,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-CentOS7_network_device_naming" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/10/21/hello-world/" class="article-date">
-  <time datetime="2019-10-21T12:13:11.137Z" itemprop="datePublished">2019-10-21</time>
+    <a href="/2017/12/03/CentOS7_network_device_naming/" class="article-date">
+  <time datetime="2017-12-03T02:45:10.000Z" itemprop="datePublished">2017-12-03</time>
 </a>
     
   </div>
@@ -113,7 +230,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/21/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/12/03/CentOS7_network_device_naming/">浅谈 CentOS/RHEL 7 下的网络设备命名规则</a>
     </h1>
   
 
@@ -121,26 +238,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>使用过CentOS 7 或者RHEL 7的同学应该都见过类似 eno, em, ens 之类的网卡名称, 那么在什么情况下用什么命名方式有没有什么规则呢？<br>答案是，有的。</p>
+<p>CentOS 7 中，网卡名称通常由两个组件来决定的: systemd , biosdevname。<br>默认情况下，由systemd来决定网卡名称，systemd会按照以下规则来命名网卡:</p>
+<ul>
+<li>场景1：如果BIOS中存在板载网卡, 并能够提供索引，则使用eno命名，比如 eno1, 如果没有板载设备，就掉到场景2。</li>
+<li>场景2：如果BIOS中存在PCI-E热插拔网卡，并提供了索引，则采用ens命名，例如ens1，如果没有则掉到场景3。</li>
+<li>场景3：使用网卡的物理位置enp来命名，例如enp2s0。如果没有物理位置信息，则掉到场景5。</li>
+<li>场景4：使用MAC地址命名网卡，例如enx78e7d1ea46da。不过默认不启用这个特性。</li>
+<li>场景5：如果123场景都没有命中，则使用传统的命名方式eth来命名。</li>
+</ul>
+<p>到这里，有人会问，那么em，pXpY之类的命名规则去哪了？</p>
+<p>嗯，还有一种情况就是biosdevname。</p>
+<p>如果系统中安装并启用了biosdevname , 并且系统的BIOS版本大于或等于 SMBIOS version 2.6。通常Dell的机器SMBIOS 都是大于2.6的，所以经常能在Dell的服务器上看到em1,p3p4这样的设备。systemd 和 biosdevname 这两套命名规则不能共存，在同一时间只可能用一种，所以不会出现同时使用两种命名规则的情况。</p>
+<p>biosdevname 的命名规则:</p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>板载网卡</td>
+<td><code>em[1234]</code></td>
+</tr>
+<tr>
+<td>PCI网卡</td>
+<td><code>p&lt;slot&gt;p&lt;ethernet port&gt;</code></td>
+</tr>
+<tr>
+<td>虚拟网卡</td>
+<td><code>p&lt;slot&gt;p&lt;ethernet port&gt;_&lt;virtual interface&gt;</code></td>
+</tr>
+</tbody></table>
+<p>参考链接:</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/ch-consistent_network_device_naming" target="_blank" rel="noopener">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/ch-consistent_network_device_naming</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/21/hello-world/" data-id="ck20duv7q0000j54zdx840evr" class="article-share-link">Share</a>
+      <a data-url="https://ooneko.github.io/2017/12/03/CentOS7_network_device_naming/" data-id="ck20e09ft000brn4z2yt3d74g" class="article-share-link">Share</a>
       
-        <a href="http://yoursite.com/2019/10/21/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://ooneko.github.io/2017/12/03/CentOS7_network_device_naming/#disqus_thread" class="article-comment-link">Comments</a>
       
       
     </footer>
@@ -160,15 +301,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible-filter/" rel="tag">ansible, filter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ansible-filter/" style="font-size: 10px;">ansible, filter</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
   </div>
 
@@ -181,11 +336,19 @@
       <ul>
         
           <li>
-            <a href="/2019/10/21/test/">test</a>
+            <a href="/2019/10/21/2019-10-21-how-to-write-ansible-filter/">如何编写Ansible filters</a>
           </li>
         
           <li>
-            <a href="/2019/10/21/hello-world/">Hello World</a>
+            <a href="/2019/03/05/2019-03-05-howto-test-infinite-loop/">如何测试&#34;无限循环&#34;的代码</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/11/2018-12-11-bash_brace_expansion/">Bash brace expansion</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/03/CentOS7_network_device_naming/">浅谈 CentOS/RHEL 7 下的网络设备命名规则</a>
           </li>
         
       </ul>
@@ -200,7 +363,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 John Doe<br>
+      &copy; 2019 Lucas<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
