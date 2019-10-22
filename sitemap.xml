@@ -3,15 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ooneko.github.io/categories/</loc>
+    <loc>https://ooneko.github.io/</loc>
+    <lastmod>2019-03-05T17:42:50+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ooneko.github.io/</loc>
+    <loc>https://ooneko.github.io/posts/</loc>
+    <lastmod>2019-03-05T17:42:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ooneko.github.io/tags/python/</loc>
+    <lastmod>2019-03-05T17:42:50+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://ooneko.github.io/tags/</loc>
+    <lastmod>2019-03-05T17:42:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ooneko.github.io/tags/test/</loc>
+    <lastmod>2019-03-05T17:42:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ooneko.github.io/posts/2019-03-05-howto-test-infinite-loop/</loc>
+    <lastmod>2019-03-05T17:42:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ooneko.github.io/posts/2018-12-11-bash_brace_expansion/</loc>
+    <lastmod>2018-12-11T15:17:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ooneko.github.io/posts/centos7_network_device_naming/</loc>
+    <lastmod>2017-12-03T10:45:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ooneko.github.io/categories/</loc>
   </url>
   
 </urlset>

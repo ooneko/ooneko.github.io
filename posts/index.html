@@ -25,22 +25,22 @@
 
     
     
-      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="My New Hugo Site" />
-      <link href="/index.xml" rel="feed" type="application/rss+xml" title="My New Hugo Site" />
+      <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="My New Hugo Site" />
+      <link href="/posts/index.xml" rel="feed" type="application/rss+xml" title="My New Hugo Site" />
       
     
     
-    <meta property="og:title" content="My New Hugo Site" />
+    <meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://ooneko.github.io/" />
+<meta property="og:url" content="https://ooneko.github.io/posts/" />
 
 <meta property="og:updated_time" content="2019-03-05T17:42:50+00:00" />
-<meta itemprop="name" content="My New Hugo Site">
+<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="My New Hugo Site"/>
+<meta name="twitter:title" content="Posts"/>
 <meta name="twitter:description" content=""/>
 
   </head>
@@ -78,7 +78,7 @@
 
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          My New Hugo Site
+          Posts
         </h1>
         
       </div>
@@ -88,126 +88,74 @@
 
     <main class="pb7" role="main">
       
-  <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
-    
-  </article>
-  
-  
-  
-  
-  
-  
-  
-    
-    
-
-    <div class="pa3 pa4-ns w-100 w-70-ns center">
+  <article class="pa3 pa4-ns nested-copy-line-height nested-img">
+    <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></section>
+    <section class="flex-ns flex-wrap justify-around mt5">
       
-       
-          <h1 class="flex-none">
-            Recent Posts
-          </h1>
-        
-
-      
-
-      <section class="w-100 mw8">
-        
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/2019-03-05-howto-test-infinite-loop/" class="color-inherit dim link">
-            如何测试&#34;无限循环&#34;的代码
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          在写 python 有时会遇到一些”无限循环“的代码需要测试，比如一个持续监控某个api状态的线程。很有可能会写成这样:
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/2019-03-05-howto-test-infinite-loop/" class="link black dim">
+        如何测试&#34;无限循环&#34;的代码
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      在写 python 有时会遇到一些”无限循环“的代码需要测试，比如一个持续监控某个api状态的线程。很有可能会写成这样:
 def watch(self): while self.running: do_something() ...  这样的话，单元测试写起来就比较奇怪了。最先想到的是把其中某个函数mock掉，通过side_effect 返回一个exception 来结束测试。
 class TestCase(unittest.TestCase): def test_watch(self): do_something = mock.Mock() do_something.side_effect = ['some_valuable_info', Exception] self.assertRaises(Exception, do_something)  有没有更好的方法呢？ 有.
 把退出条件放到一个方法里面去，在测试的时候，通过mock掉这个方法，来达到退出条件。
 def is_running(self): return self.running def watch(self): while self.is_running(): do_something() ...  这样测试起来就容易多了, 当第一次运行时，调到的is_running 是True，第二次运行调用到is_running 的时候就会退出测试。
 class TestCase(unittest.TestCase): def test_watch(self): mock_is_running = mock.Mock() mock_is_running.side_effect = [True, False] watch() ...  总结一下： 几乎没有真正的‘无限循环’代码，找出它的退出条件，然后重构代码。
-        </div>
-          <a href="/posts/2019-03-05-howto-test-infinite-loop/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
     </div>
   </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
+</div>
+</div>
       
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/2018-12-11-bash_brace_expansion/" class="color-inherit dim link">
-            Bash brace expansion
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          bash 中的大括号&rdquo;{}&ldquo;,通常用来生成一组有规律的字符串
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/2018-12-11-bash_brace_expansion/" class="link black dim">
+        Bash brace expansion
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      bash 中的大括号&rdquo;{}&ldquo;,通常用来生成一组有规律的字符串
 最常用的 mkdir /tmp/test{1..3} 在执行的时候会被翻译成:
 mkdir /tmp/test1 /tmp/test2 /tmp/test3  生成连续的字符或者数字用&quot;..&quot;
 {0..12} =&gt; 0 1 2 3 4 5 6 7 8 9 10 11 12 {3..-2} =&gt; 3 2 1 0 -1 -2 {a..g} =&gt; a b c d e f g {g..a} =&gt; g f e d c b a  生成非连续的字符用逗号分隔“,”
 {aa,bb,cc,dd} =&gt; aa bb cc dd  当然也可以组合使用
 {a,b{0..3},c} =&gt; a b0 b1 b2 b3 c  当brace expation 和其他字符串一起出现时，会重复整个字符串
-        </div>
-          <a href="/posts/2018-12-11-bash_brace_expansion/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
     </div>
   </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
+</div>
+</div>
       
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/centos7_network_device_naming/" class="color-inherit dim link">
-            浅谈 CentOS/RHEL 7 下的网络设备命名规则
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          使用过CentOS 7 或者RHEL 7的同学应该都见过类似 eno, em, ens 之类的网卡名称, 那么在什么情况下用什么命名方式有没有什么规则呢？ 答案是，有的。
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/centos7_network_device_naming/" class="link black dim">
+        浅谈 CentOS/RHEL 7 下的网络设备命名规则
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      使用过CentOS 7 或者RHEL 7的同学应该都见过类似 eno, em, ens 之类的网卡名称, 那么在什么情况下用什么命名方式有没有什么规则呢？ 答案是，有的。
 CentOS 7 中，网卡名称通常由两个组件来决定的: systemd , biosdevname。 默认情况下，由systemd来决定网卡名称，systemd会按照以下规则来命名网卡: - 场景1：如果BIOS中存在板载网卡, 并能够提供索引，则使用eno命名，比如 eno1, 如果没有板载设备，就掉到场景2。 - 场景2：如果BIOS中存在PCI-E热插拔网卡，并提供了索引，则采用ens命名，例如ens1，如果没有则掉到场景3。 - 场景3：使用网卡的物理位置enp来命名，例如enp2s0。如果没有物理位置信息，则掉到场景5。 - 场景4：使用MAC地址命名网卡，例如enx78e7d1ea46da。不过默认不启用这个特性。 - 场景5：如果123场景都没有命中，则使用传统的命名方式eth来命名。
 到这里，有人会问，那么em，pXpY之类的命名规则去哪了？
 嗯，还有一种情况就是biosdevname。
 如果系统中安装并启用了biosdevname , 并且系统的BIOS版本大于或等于 SMBIOS version 2.6。通常Dell的机器SMBIOS 都是大于2.6的，所以经常能在Dell的服务器上看到em1,p3p4这样的设备。systemd 和 biosdevname 这两套命名规则不能共存，在同一时间只可能用一种，所以不会出现同时使用两种命名规则的情况。
 biosdevname 的命名规则:
    Device Name     板载网卡 em[1234]   PCI网卡 p&lt;slot&gt;p&lt;ethernet port&gt;   虚拟网卡 p&lt;slot&gt;p&lt;ethernet port&gt;_&lt;virtual interface&gt;    参考链接: - https://access.
-        </div>
-          <a href="/posts/centos7_network_device_naming/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
     </div>
   </div>
-</article>
-
-          </div>
-        
-      </section>
-
+</div>
+</div>
       
+    </section>
 
-      </div>
-  
+</article>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
