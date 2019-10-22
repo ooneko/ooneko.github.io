@@ -102,15 +102,15 @@
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
       <a href="/posts/how_to_write_ansible_filters/" class="link black dim">
-        HOW TO WRITE ANSIBLE FILTER PLUGINS
+        如何编写 ANSIBLE FILTER PLUGINS
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
-ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2上找到了关于filters的定义:
+ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2 api上找到了关于filters的定义:
  Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
  总结一下就是：
- filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 通常是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  如何创建filter plugin 刚才已经知道filter plugin 本质上是一个python function.
+ filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  创建filter plugin 刚才已经知道filter plugin 本质上是一个python function.
     </div>
   </div>
 </div>
