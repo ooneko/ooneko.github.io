@@ -35,7 +35,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ooneko.github.io/" />
 
-<meta property="og:updated_time" content="2019-12-26T16:34:07+08:00" />
+<meta property="og:updated_time" content="2020-02-08T15:52:58+08:00" />
 <meta itemprop="name" content="Ananke: a Hugo Theme">
 <meta itemprop="description" content="The last theme you&#39;ll ever need. Maybe.">
 
@@ -165,6 +165,80 @@ if (!doNotTrack) {
   <div class="db pv4 ph3 ph0-l no-underline dark-gray">
     <div class="flex flex-column flex-row-ns">
       
+          
+        
+        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+          <a href="/posts/how_to_write_ansible_module/" class="db grow">
+            <img src="https://ooneko.github.io/images/notebook.jpg" class="img" alt="image from 如何编写Ansible module">
+          </a>
+        </div>
+      
+      <div class="blah w-100 w-60-ns pl3-ns">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/how_to_write_ansible_module/" class="color-inherit dim link">
+            如何编写Ansible module
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          如果你想要开发Ansible Module, 想必你已经知道了什么是Ansible Module. 比如以下这段Ansible Task:
+- name: Ensure container-selinux exist yum: name: &quot;container-selinux&quot;  调用了yum这个Module, 它的目的是通yum 在系统上安装 container-selinux 这个包, 如果系统中已存在这个包, 就不会再安装它.
+Module 很重要的一个特性就是幂等性. 在上面这段代码就可以翻译成一句描述: &ldquo;在系统中存在一个rpm包, 并且它是通过yum安装的.&rdquo; 而这句话的背后是如何实现的, 就是Module需要做的事情了.
+准备开发环境: 1. clone ansible 代码 git clone https://github.com/ansible/ansible.git 2. 进入ansible 目录 cd ansible 3. 创建虚拟环境 python3 -m venv venv 4. 进入虚拟环境 . venv/bin/activate 5. 安装依赖 pip install -r requirements.txt 6.
+        </div>
+          <a href="/posts/how_to_write_ansible_module/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/rpm_packaging/" class="color-inherit dim link">
+            RPM Packaging
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          作为Linux 用户, 你是希望在安装软件的时候, 去下载, 编译, 拷贝二进制, 拷贝配置文件, 运行脚本, 创建用户.等等, 还是希望通过一条命令把软件给安装好?
+或者是分发软件的时候告诉人们, 先编译,再安装依赖, 然后拷贝配置文件, 创建用户&hellip;. 还是告诉人们, yum install it ?
+通过将软件打包成RPM包, 可以极大的简化软件分发,部署的成本. 还包括安装, 升级, 删除 等等.
+利用RPM, 还可以很方便的进行版本管理, RPM有一个数据用于记录软件包的Metadata, 以及安装了哪些文件. 因为有一个统一存储版本的数据库, 所以这样可以使我们更容易做版本管理.
+从运维的角度来说, 所安装的软件最好有一个统一的地方维护已安装的软件的列表以及版本. 通过查询这个数据库, 就可以知道这个软件有没有安装, 安装的是什么版本. 如果你已经想通过RPM开始打包你的应用, 需要确认你的应用是哪种语言类型.
+程序的类型 因为不同的类型有不同的打包方法.
+从代码-机器码的角度上来看, 源码分为两种类型: 编译型, 解释型, 还有编译解释型.
+编译型
+编译型语言需要将源码编译成二进制文件, 才可以执行.
+运行这些二进文件时, CPU 可以直接加载这些程序.
+编译型的语言有Go, C, C++. 等等.
+解释型
+典型的解释型语言就是Bash, bash 可以直接运行shell文件. 无需编译.
+编译解释型
+编译解释型语言有Java, Python. 这类语言需要将源码编译成字节码. 然后再由解释器运行字节码. 在运行时将字节码翻译成机器码发送给CPU去执行.
+编译型语言 以Go为示例, 写一个 hello world.
+        </div>
+          <a href="/posts/rpm_packaging/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/mysql_replication_with_haproxy/" class="color-inherit dim link">
@@ -194,77 +268,24 @@ TCP-Check-Wrapper 这个Wrapper应该监听在TCP端口上,并以守护进程的
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-          
-        
-        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-          <a href="/posts/how_to_write_ansible_filters/" class="db grow">
-            <img src="https://ooneko.github.io/images/notebook.jpg" class="img" alt="image from 如何编写 ANSIBLE FILTER PLUGINS">
-          </a>
-        </div>
-      
-      <div class="blah w-100 w-60-ns pl3-ns">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/how_to_write_ansible_filters/" class="color-inherit dim link">
-            如何编写 ANSIBLE FILTER PLUGINS
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          什么是 ansible filter plugin ？ 先来看一段代码： union_list: {{ [1,2,3] | union([2,3,4]) }} 这段代码的意思是想要取两个list的并集. 思考一下，如果没有union这个filter，我们该如何得到这两个list的并集？
-ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2 api上找到了关于filters的定义:
- Custom filters are just regular Python functions that take the left side of the filter as first argument and the arguments passed to the filter as extra arguments or keyword arguments.
- 总结一下就是：
- filter plugin 用于修改数据，通过处理 | 左边输入的参数，返回处理后的结果 filter plugin 是一个python function，可以在jinja2 templating 表达式中通过 | 调用 filter plugin 需要至少一个参数，也可以接收 0到N个额外的positional / keyword argument  创建filter plugin 刚才已经知道filter plugin 本质上是一个python function.
-        </div>
-          <a href="/posts/how_to_write_ansible_filters/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/2019-03-05-howto-test-infinite-loop/" class="color-inherit dim link">
-            如何测试&#34;无限循环&#34;的代码
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          在写 python 有时会遇到一些”无限循环“的代码需要测试，比如一个持续监控某个api状态的线程。很有可能会写成这样:
-def watch(self): while self.running: do_something() ...  这样的话，单元测试写起来就比较奇怪了。最先想到的是把其中某个函数mock掉，通过side_effect 返回一个exception 来结束测试。
-class TestCase(unittest.TestCase): def test_watch(self): do_something = mock.Mock() do_something.side_effect = ['some_valuable_info', Exception] self.assertRaises(Exception, do_something)  有没有更好的方法呢？ 有.
-把退出条件放到一个方法里面去，在测试的时候，通过mock掉这个方法，来达到退出条件。
-def is_running(self): return self.running def watch(self): while self.is_running(): do_something() ...  这样测试起来就容易多了, 当第一次运行时，调到的is_running 是True，第二次运行调用到is_running 的时候就会退出测试。
-class TestCase(unittest.TestCase): def test_watch(self): mock_is_running = mock.Mock() mock_is_running.side_effect = [True, False] watch() ...  总结一下： 几乎没有真正的‘无限循环’代码，找出它的退出条件，然后重构代码。
-        </div>
-          <a href="/posts/2019-03-05-howto-test-infinite-loop/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/how_to_write_ansible_filters/" class="link black dim">
+              如何编写 ANSIBLE FILTER PLUGINS
+            </a>
+          </h2>
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/2019-03-05-howto-test-infinite-loop/" class="link black dim">
+              如何测试&#34;无限循环&#34;的代码
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/2018-12-11-bash_brace_expansion/" class="link black dim">
@@ -293,7 +314,7 @@ class TestCase(unittest.TestCase): def test_watch(self): mock_is_running = mock.
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://ooneko.github.io/" >
-    &copy; 2019 华彬闳的Blog
+    &copy; 2020 华彬闳的Blog
   </a>
     <div>
 

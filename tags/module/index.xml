@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>module on 华彬闳的Blog</title>
+    <link>https://ooneko.github.io/tags/module/</link>
+    <description>Recent content in module on 华彬闳的Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Feb 2020 15:52:58 +0800</lastBuildDate>
+    
+	<atom:link href="https://ooneko.github.io/tags/module/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>如何编写Ansible module</title>
+      <link>https://ooneko.github.io/posts/how_to_write_ansible_module/</link>
+      <pubDate>Sat, 08 Feb 2020 15:52:58 +0800</pubDate>
+      
+      <guid>https://ooneko.github.io/posts/how_to_write_ansible_module/</guid>
+      <description>如果你想要开发Ansible Module, 想必你已经知道了什么是Ansible Module. 比如以下这段Ansible Task:
+- name: Ensure container-selinux exist yum: name: &amp;quot;container-selinux&amp;quot;  调用了yum这个Module, 它的目的是通yum 在系统上安装 container-selinux 这个包, 如果系统中已存在这个包, 就不会再安装它.
+Module 很重要的一个特性就是幂等性. 在上面这段代码就可以翻译成一句描述: &amp;ldquo;在系统中存在一个rpm包, 并且它是通过yum安装的.&amp;rdquo; 而这句话的背后是如何实现的, 就是Module需要做的事情了.
+准备开发环境: 1. clone ansible 代码 git clone https://github.com/ansible/ansible.git 2. 进入ansible 目录 cd ansible 3. 创建虚拟环境 python3 -m venv venv 4. 进入虚拟环境 . venv/bin/activate 5. 安装依赖 pip install -r requirements.txt 6.</description>
+    </item>
+    
+  </channel>
+</rss>

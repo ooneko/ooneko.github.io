@@ -35,7 +35,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ooneko.github.io/tags/ansible/" />
 
-<meta property="og:updated_time" content="2019-10-22T12:13:09+08:00" />
+<meta property="og:updated_time" content="2020-02-08T15:52:58+08:00" />
 <meta itemprop="name" content="ansible">
 <meta itemprop="description" content="大猫的Blog.">
 
@@ -139,6 +139,26 @@ if (!doNotTrack) {
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/how_to_write_ansible_module/" class="link black dim">
+        如何编写Ansible module
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      如果你想要开发Ansible Module, 想必你已经知道了什么是Ansible Module. 比如以下这段Ansible Task:
+- name: Ensure container-selinux exist yum: name: &quot;container-selinux&quot;  调用了yum这个Module, 它的目的是通yum 在系统上安装 container-selinux 这个包, 如果系统中已存在这个包, 就不会再安装它.
+Module 很重要的一个特性就是幂等性. 在上面这段代码就可以翻译成一句描述: &ldquo;在系统中存在一个rpm包, 并且它是通过yum安装的.&rdquo; 而这句话的背后是如何实现的, 就是Module需要做的事情了.
+准备开发环境: 1. clone ansible 代码 git clone https://github.com/ansible/ansible.git 2. 进入ansible 目录 cd ansible 3. 创建虚拟环境 python3 -m venv venv 4. 进入虚拟环境 . venv/bin/activate 5. 安装依赖 pip install -r requirements.txt 6.
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100  mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/how_to_write_ansible_filters/" class="link black dim">
         如何编写 ANSIBLE FILTER PLUGINS
       </a>
@@ -162,7 +182,7 @@ ansible filter plugins 本质上就是 jinja2 filters，所以我在jinja2 api�
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://ooneko.github.io/" >
-    &copy; 2019 华彬闳的Blog
+    &copy; 2020 华彬闳的Blog
   </a>
     <div>
 
